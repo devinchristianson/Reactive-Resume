@@ -1,0 +1,24 @@
+http:
+  middlewares:
+    api-rewrite:
+      stripprefix:
+        prefixes: /api
+  routers:
+    client:
+      rule: PathPrefix(`/`)
+      entrypoints: web
+      service: client
+    server:
+      rule: PathPrefix(`/api`)
+      entrypoints: web
+      middlewares: api-rewrite
+      service: server
+  services:
+    client:
+      loadbalancer:
+        servers:
+          - url: 'http://localhost:3000'
+    server:
+      loadbalancer:
+        servers:
+          - url: 'http://localhost:3100'

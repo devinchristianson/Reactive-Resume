@@ -1,0 +1,6 @@
+entrypoints:
+  web:
+    address: ':3001'
+providers:
+  file:
+    filename: /etc/traefik/config.yml
